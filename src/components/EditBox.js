@@ -25,34 +25,42 @@ class EditBox extends React.Component {
         return (
             <div className='box'>
                 <h3>{this.state.boxTitle}</h3>
-                <p>composant EditBox</p>
+                <div>
+                    <div className='box_saisie'>
+                        <label htmlFor='titreMainBox'>Titre MainBox </label>
+                        <input
+                            type="text"
+                            id="titreMainBox"
+                            name="titreMainBox"
+                            value={this.props.titreMainBox}
+                            onChange={this.handleMainBoxTitleChange}
+                        />
+                    </div>
+                    
+                    <div className='box_saisie'>
+                        <label htmlFor='titreMiddleBox'>Titre MiddleBox </label>
+                        <input
+                            type="text"
+                            id="titreMiddleBox"
+                            name="titreMiddleBox"
+                            value={this.props.titreMiddleBox}
+                            onChange={this.handleMiddleBoxTitleChange}
+                        />    
+                    </div>
+                    
+                    <div className='box_saisie'>
+                        <label htmlFor='boxTitle'>Titre EditBox </label>
+                        <input
+                            type="text"
+                            id="boxTitle"
+                            name="boxTitle"
+                            value={this.state.boxTitle}
+                            onChange={this.handleChangeTitle}
+                        />
+                    </div>
+                   
+                </div>
 
-                    ­<label htmlFor='titreMainBox'>Titre MainBox </label>
-                    <input
-                        type="text"
-                        id="titreMainBox"
-                        name="titreMainBox"
-                        value={this.props.titreMainBox}
-                        onChange={this.handleMainBoxTitleChange}
-                    />
-                    <br/>
-­                    <label htmlFor='titreMiddleBox'>Titre MiddleBox </label>
-                    <input
-                        type="text"
-                        id="titreMiddleBox"
-                        name="titreMiddleBox"
-                        value={this.props.titreMiddleBox}
-                        onChange={this.handleMiddleBoxTitleChange}
-                    />
-                    <br/>
-­                    <label htmlFor='boxTitle'>Titre EditBox </label>
-                    <input
-                        type="text"
-                        id="boxTitle"
-                        name="boxTitle"
-                        value={this.state.boxTitle}
-                        onChange={this.handleChangeTitle}
-                    />
             </div>
         );
     }

@@ -23,8 +23,7 @@ class MiddleBox extends React.Component {
         return (
             <div className='box'>
                 <h2>{this.state.boxTitle}</h2>
-                <p>composant MiddleBox<br />
-
+                <div className='box_saisie box_saisie_middle'>
                     <label htmlFor='titreMiddleBox'>Titre Box </label>
                     <input
                         type="text"
@@ -33,7 +32,7 @@ class MiddleBox extends React.Component {
                         value={this.state.boxTitle}
                         onChange={this.handleChangeTitle}
                     />
-                </p>
+                </div>
 
                 <EditBox 
                     titreMainBox={this.props.titreMainBox} 

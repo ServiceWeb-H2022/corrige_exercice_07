@@ -8,6 +8,7 @@ class MainBox extends React.Component {
         this.state = {
             boxTitle: 'MainBox',
         }
+
     }
 
     handleChangeTitleFromChild = (newTitle) => this.setState({boxTitle: newTitle});
@@ -15,10 +16,10 @@ class MainBox extends React.Component {
 
     render() {
         return (
+            
             <div className='box'>
                 <h1>{this.state.boxTitle}</h1>
-                <p>composant MainBox<br/>
-
+                <div className='box_saisie box_saisie_main'>
                     <label htmlFor='titreMainBox'>Titre Box </label>
                     <input
                         type="text"
@@ -27,7 +28,7 @@ class MainBox extends React.Component {
                         value={this.state.boxTitle}
                         onChange={this.handleChangeTitle}
                     />
-                </p>
+                </div>
 
                 <MiddleBox 
                     titreMainBox={this.state.boxTitle}
