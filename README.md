@@ -1,70 +1,166 @@
-# Getting Started with Create React App
+# Exercice 07 - L'état local
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Pour mettre en pratique ce qu'on a vu à propos de l'état local d'un composant (l'objet state), nous allons créer les trois composant suivant qui vont interagir entre eux en modifiant les titres de chacun.
 
-## Available Scripts
+![exercice07_01](\img\exercice07_01.png)
 
-In the project directory, you can run:
+## Mise en place
 
-### `npm start`
+Vous devez créer les trois composants suivant : 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- MainBox
+- MiddleBox
+- EditBox
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Chaque composante contient le suivant (MainBox est le parent de MiddleBox qui est lui-même parent de EditBox). Je vous donne <u>une partie</u> du code HTML que la fonction **render()** va retourner ainsi que le style css.
 
-### `npm test`
+App.js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+``````react
+import './App.css';
+import MainBox from './MainBox';
 
-### `npm run build`
+function App() {
+  return (
+    <div className="App">
+        <MainBox />
+    </div>
+  );
+}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export default App;
+``````
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+MainBox.js
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+``````react
+render() {
+    return (
+        <div className='box'>
+            <h1>{this.state.boxTitle}</h1>
+            <div className='box_saisie box_saisie_main'>
+                <label htmlFor='titreMainBox'>Titre Box </label>
+                <input
+                    type="text"
+                    id="titreMainBox"
+                    name="titreMainBox"
+                    />
+            </div>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+            <MiddleBox />
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+        </div>
+    );
+}
+``````
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+MiddleBox.js
 
-## Learn More
+``````react
+render() {
+    return (
+        <div className='box'>
+            <h2>{this.state.boxTitle}</h2>
+            <div className='box_saisie box_saisie_middle'>
+                <label htmlFor='titreMiddleBox'>Titre Box </label>
+                <input
+                    type="text"
+                    id="titreMiddleBox"
+                    name="titreMiddleBox"
+                    />
+            </div>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+            <EditBox />
+        </div>
+    );
+}
+``````
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+EditBox.js
 
-### Code Splitting
+``````react
+render() {
+	return (
+        <div className='box'>
+            <h3>{this.state.boxTitle}</h3>
+            <div>
+                <div className='box_saisie'>
+                    <label htmlFor='titreMainBox'>Titre MainBox </label>
+                    <input
+                        type="text"
+                        id="titreMainBox"
+                        name="titreMainBox"
+                    />
+        		</div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+                <div className='box_saisie'>
+                    <label htmlFor='titreMiddleBox'>Titre MiddleBox </label>
+                    <input
+                        type="text"
+                        id="titreMiddleBox"
+                        name="titreMiddleBox"
+                    />    
+                </div>
 
-### Analyzing the Bundle Size
+                <div className='box_saisie'>
+                    <label htmlFor='boxTitle'>Titre EditBox </label>
+                    <input
+                        type="text"
+                        id="boxTitle"
+                        name="boxTitle"
+                    />
+                </div>
+			</div>
+		</div>
+	);
+}
+``````
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+App.css
 
-### Making a Progressive Web App
+``````css
+.App {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+.box {
+  border: 2px solid #61dafb;
+  padding: 10px;
+  border-radius: 5px;
+}
 
-### Advanced Configuration
+.box_saisie {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 2px;
+  gap: 10px
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+.box_saisie_main {
+  padding: 0 20px 10px 20px;
+}
 
-### Deployment
+.box_saisie_middle {
+  padding: 0 10px 10px 10px;
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+h1, h2, h3 {
+  margin: 20px 0;
+}
+``````
 
-### `npm run build` fails to minify
+## Instruction
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Dès qu'on modifie la valeur d'une des zones de saisie, le texte doit être modifié dans tous les champs correspondants (zone de saisie, titre). Ex si je modifie dans le composant EditBox la valeur dans le champ de saisie pour le composant MainBox, la valeur sera aussi modifié dans le champ de saisie du composant MainBox ainsi que son titre.
+- Complétez les fonctions render() de chaque composant avec ce qui manque et ajouter les fonctions de retour au bon endroit.
+- Inspirez-vous des notes de cours, toutes les réponses y sont.
